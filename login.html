@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/images/aspirecodelogo.jpeg" type="image/jpeg">
+  <title>PlumbLink - Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --navy: #001f3f;
+      --teal: #008080;
+      --light-teal: #e0f0f0;
+      --white: #ffffff;
+      --bg: #f8f9fa;
+      --text: #333333;
+      --text-light: #555555;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: var(--text);
+    }
+
+    .login-wrapper {
+      width: 100%;
+      max-width: 960px;
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+    }
+
+    .left-side {
+      flex: 1;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--teal) 100%);
+      color: white;
+      padding: 70px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .left-side h2 {
+      font-size: 2.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .left-side p {
+      font-size: 1.05rem;
+      opacity: 0.92;
+      line-height: 1.7;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .right-side {
+      flex: 1;
+      padding: 70px 50px;
+      background: white;
+    }
+
+    .logo {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--navy);
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .tab-bar {
+      display: flex;
+      border-bottom: 2px solid #e0e0e0;
+      margin-bottom: 2rem;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 16px;
+      text-align: center;
+      font-weight: 500;
+      color: #666;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    .tab.active {
+      color: var(--teal);
+      font-weight: 600;
+    }
+
+    .tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--teal);
+    }
+
+    .form-section {
+      display: none;
+    }
+
+    .form-section.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 1.6rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.6rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #444;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.25s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(0,128,128,0.12);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 0.8rem;
+    }
+
+    .btn-primary {
+      background: var(--teal);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #006666;
+    }
+
+    .btn-secondary {
+      background: var(--light-teal);
+      color: var(--teal);
+      border: 1px solid var(--teal);
+    }
+
+    .btn-secondary:hover {
+      background: #d0e8e8;
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .demo-info {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: #666;
+      text-align: center;
+    }
+
+    .otp-container {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #eee;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .login-wrapper { flex-direction: column; }
+      .left-side, .right-side { padding: 50px 30px; }
+      .left-side { border-radius: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-wrapper">
+    <div class="left-side">
+      <h2>Welcome to PlumbLink</h2>
+      <p>Professional access for Admins, Customers & Plumbers — secure, fast, and role-based.</p>
+    </div>
+
+    <div class="right-side">
+      <div class="logo">PlumbLink</div>
+
+      <div class="tab-bar">
+        <div class="tab active" data-tab="admin" onclick="switchTab('admin', this)">Admin</div>
+        <div class="tab" data-tab="customer" onclick="switchTab('customer', this)">Customer</div>
+        <div class="tab" data-tab="plumber" onclick="switchTab('plumber', this)">Plumber</div>
+      </div>
+
+      <!-- Admin Login -->
+      <div id="admin" class="form-section active">
+        <div class="form-group">
+          <label>Email Address</label>
+          <input id="admin-email" type="email" placeholder="admin@plumblink.com" required />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input id="admin-password" type="password" placeholder="••••••••" required />
+        </div>
+        <button class="btn btn-primary" onclick="login('admin')">Login as Admin</button>
+        <div class="demo-info">Demo: admin@plumblink.com / admin123</div>
+      </div>
+
+      <!-- Customer Login -->
+      <div id="customer" class="form-section">
+        <form id="customerForm">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input id="cust-name" type="text" placeholder="Your full name" required />
+          </div>
+          <div class="form-group">
+            <label>Mobile Number</label>
+            <input id="cust-phone" type="tel" placeholder="+91 98765 43210" required />
+          </div>
+
+          <div class="otp-container hidden" id="otpArea">
+            <div class="form-group">
+              <label>OTP</label>
+              <input id="cust-otp" type="text" placeholder="Enter 6-digit OTP" maxlength="6" />
+            </div>
+            <button type="submit" class="btn btn-primary">Login as Customer</button>
+          </div>
+
+          <button type="button" class="btn btn-secondary" id="sendOtp">Send OTP</button>
+        </form>
+        <div class="demo-info">Demo: any number → OTP is always <strong>123456</strong></div>
+      </div>
+
+      <!-- Plumber Login -->
+      <div id="plumber" class="form-section">
+        <div class="form-group">
+          <label>Email Address</label>
+          <input id="plumber-email" type="email" placeholder="plumber@plumblink.com" required />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input id="plumber-password" type="password" placeholder="••••••••" required />
+        </div>
+        <button class="btn btn-primary" onclick="login('plumber')">Login as Plumber</button>
+        <div class="demo-info">Demo: plumber@plumblink.com / plumb123</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Switch tabs
+    function switchTab(tabId, el) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+
+      document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    // Login function with correct redirects
+    function login(role) {
+      let email, password;
+
+      if (role === 'admin') {
+        email = document.getElementById('admin-email').value.trim();
+        password = document.getElementById('admin-password').value;
+      } else if (role === 'plumber') {
+        email = document.getElementById('plumber-email').value.trim();
+        password = document.getElementById('plumber-password').value;
+      }
+
+      if (!email || !password) {
+        alert("Please fill in all fields");
+        return;
+      }
+
+      // Demo login (instant, no server needed)
+      if (role === 'admin' && email === 'admin@plumblink.com' && password === 'admin123') {
+        localStorage.setItem('user_role', 'admin');
+        window.location.href = 'dashboard-admin.html';  // ← Correct admin page
+        return;
+      }
+
+      if (role === 'plumber' && email === 'plumber@plumblink.com' && password === 'plumb123') {
+        localStorage.setItem('user_role', 'plumber');
+        localStorage.setItem('plumber_id', '42');
+        window.location.href = 'plumberapp.html';
+        return;
+      }
+
+      alert("Invalid credentials for demo. Use the demo emails/passwords above.");
+    }
+
+    // Customer OTP Login (Demo)
+    const sendOtpBtn = document.getElementById('sendOtp');
+    const customerForm = document.getElementById('customerForm');
+    const otpArea = document.getElementById('otpArea');
+
+    sendOtpBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('cust-name').value.trim();
+      const phone = document.getElementById('cust-phone').value.trim();
+      if (!name || !phone) {
+        alert("Please enter name and phone");
+        return;
+      }
+      otpArea.classList.remove('hidden');
+      alert('Demo OTP sent: 123456');
+    });
+
+    customerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const otp = document.getElementById('cust-otp').value;
+      if (otp === '123456') {
+        localStorage.setItem('user_role', 'customer');
+        localStorage.setItem('customer_name', document.getElementById('cust-name').value);
+        window.location.href = 'dashboard.html';  // Customer dashboard
+      } else {
+        alert('Invalid OTP. Use 123456 for demo.');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Plumber Live Map</title>
+
+  <!-- Leaflet CSS -->
+  <link 
+    rel="stylesheet" 
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+  <link rel="icon" href="/images/aspirecodelogo.jpeg" type="image/jpeg">
+
+  <style>
+    :root{
+      --navy: #001F3F;
+      --teal: #008080;
+      --soft-green: #98FB98;
+      --white: #FFFFFF;
+      --light-grey: #F5F5F5;
+      --text-dark: #333333;
+      --text-light: #666666;
+      --shadow-subtle: 0 2px 10px rgba(0, 31, 63, 0.1);
+      --shadow-card: 0 4px 20px rgba(0, 128, 128, 0.08);
+      --gradient-primary: linear-gradient(135deg, var(--navy) 0%, var(--teal) 100%);
+      --border-radius: 12px;
+      --transition: all 0.3s ease;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: var(--texture);
+      color: var(--text-primary);
+    }
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+    .control-panel {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+      background: rgba(255,255,255,0.95);
+      padding: 8px 10px;
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-family: system-ui, sans-serif;
+      font-size: 12px;
+      max-width: 260px;
+      box-shadow: 0 6px 20px rgba(16,42,67,0.06);
+    }
+
+    /* Ensure all small/secondary text is black */
+    small, p, .subtitle, .meta, .rec-meta, .detail-label, .stat-subtext, .timeline-date, .timeline-desc, .text-secondary { color: var(--text-primary); }
+    .control-panel button {
+      margin-top: 6px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    /* Hide Leaflet controls if you don't want to see them */
+    .leaflet-control-attribution {
+      display: none !important;
+    }
+    .leaflet-control-zoom {
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body id="top">
+
+<div id="map"></div>
+
+<div class="control-panel">
+  <div id="statusText">📌 Click on map or use GPS</div>
+  <button id="locBtn">Use My Current Location</button>
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+  // Default center (Mumbai)
+  const defaultLat = 19.0760;
+  const defaultLng = 72.8777;
+
+  const map = L.map('map').setView([defaultLat, defaultLng], 13);
+
+  // OpenStreetMap tiles
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19
+  }).addTo(map);
+
+  // One marker to move around
+  let marker = L.marker([defaultLat, defaultLng]).addTo(map);
+  marker.bindPopup("📍 Default Location").openPopup();
+
+  const statusText = document.getElementById('statusText');
+  const locBtn = document.getElementById('locBtn');
+
+  // Click on map to move marker
+  map.on("click", function(e) {
+    const lat = e.latlng.lat.toFixed(5);
+    const lng = e.latlng.lng.toFixed(5);
+
+    marker.setLatLng([lat, lng]);
+    marker.bindPopup(`📍 Selected Location<br>Lat: ${lat}<br>Lng: ${lng}`).openPopup();
+
+    statusText.textContent = `📍 Selected: ${lat}, ${lng}`;
+    console.log("Selected:", lat, lng);
+  });
+
+  // Use GPS when button clicked
+  locBtn.addEventListener('click', () => {
+    if (!navigator.geolocation) {
+      statusText.textContent = "❌ Geolocation not supported in this browser.";
+      alert("Geolocation is not supported by this browser.");
+      return;
+    }
+
+    statusText.textContent = "⏳ Getting current location…";
+
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const la = pos.coords.latitude;
+        const ln = pos.coords.longitude;
+
+        map.setView([la, ln], 15);
+        marker.setLatLng([la, ln]);
+        marker.bindPopup("📍 Your Current GPS Location").openPopup();
+
+        const msg = `✅ GPS: ${la.toFixed(5)}, ${ln.toFixed(5)}`;
+        statusText.textContent = msg;
+        console.log(msg);
+      },
+      (err) => {
+        console.warn("GPS error:", err);
+        if (err.code === 1) {
+          statusText.textContent = "❌ Permission denied for location.";
+          alert("Location access denied. Please allow location permission in the browser.");
+        } else {
+          statusText.textContent = "❌ Could not get location.";
+          alert("Could not get your location. Check GPS / browser settings.");
+        }
+      }
+    );
+  });
+
+  // Optional: try auto GPS once on load (non-blocking)
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const la = pos.coords.latitude;
+        const ln = pos.coords.longitude;
+        map.setView([la, ln], 14);
+        marker.setLatLng([la, ln]);
+        marker.bindPopup("📍 Your Current GPS Location").openPopup();
+        statusText.textContent = `✅ GPS: ${la.toFixed(5)}, ${ln.toFixed(5)}`;
+      },
+      () => {
+        statusText.textContent = "ℹ Click 'Use My Current Location' to retry GPS.";
+      }
+    );
+  }
+</script>
+
+<footer style="text-align:center; padding:24px 0; background:transparent; color:inherit;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <p>© 2025 AspirecodeAI. All rights reserved. <a href="#top" style="margin-left:12px; text-decoration:none;">↑ Top</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

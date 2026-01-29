@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/aspirecodelogo.jpeg" type="image/jpeg">
+    <title>PlumbPro Partner Portal - Join as a Plumber</title>
+    <meta name="description" content="Join PlumbPro as a partner plumber. Get more jobs, steady work, higher earnings, and use our powerful app for free.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --navy: #001F3F;
+            --teal: #008080;
+            --primary: #008080;
+            --primary-dark: #006666;
+            --secondary: #001F3F;
+            --success: #28a745;
+            --soft-green: #98FB98;
+            --white: #FFFFFF;
+            --light-grey: #F5F5F5;
+            --gray-100: #F8F9FA;
+            --gray-200: #E9ECEF;
+            --gray-700: #495057;
+            --gray-900: #212529;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --shadow-subtle: 0 2px 10px rgba(0, 31, 63, 0.1);
+            --shadow-card: 0 4px 20px rgba(0, 128, 128, 0.08);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--white);
+        }
+        a { text-decoration: none; }
+        img { max-width: 100%; display: block; }
+
+        .container {
+            width: min(100%, 1280px);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .logo span { color: var(--secondary); }
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+        .nav-links a {
+            color: var(--gray-700);
+            font-weight: 500;
+        }
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        .btn {
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-primary:hover { background: var(--primary-dark); }
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+        .btn-success:hover { background: #218838; }
+
+        /* Hero */
+        .hero {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #f0f7ff 0%, #f8fffd 100%);
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 24px;
+        }
+        .hero h1 span { color: var(--primary); }
+        .hero p {
+            font-size: 20px;
+            color: var(--gray-700);
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+        .hero .btn {
+            font-size: 18px;
+            padding: 16px 40px;
+        }
+
+        /* Benefits */
+        .benefits {
+            padding: 120px 0;
+            background: white;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 24px;
+        }
+        .section-subtitle {
+            text-align: center;
+            font-size: 20px;
+            color: var(--gray-700);
+            max-width: 800px;
+            margin: 0 auto 80px;
+        }
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+        .benefit-card {
+            background: var(--gray-100);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow-card);
+            transition: var(--transition);
+        }
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-subtle);
+        }
+        .benefit-icon {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+        .benefit-card h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 120px 0;
+            background: var(--gray-100);
+        }
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+        .step {
+            text-align: center;
+        }
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 auto 24px;
+        }
+        .step h3 {
+            font-size: 22px;
+            margin-bottom: 16px;
+        }
+
+        /* Requirements */
+        .requirements {
+            padding: 120px 0;
+            background: white;
+        }
+        .req-list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .req-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 18px;
+        }
+        .req-item i {
+            color: var(--success);
+            font-size: 24px;
+        }
+
+        /* CTA */
+        .cta {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+        }
+        .cta h2 {
+            font-size: 40px;
+            margin-bottom: 24px;
+        }
+        .cta p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+        .cta .btn {
+            background: white;
+            color: var(--primary);
+            font-size: 18px;
+            padding: 16px 40px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--gray-900);
+            color: white;
+            padding: 80px 0 40px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        .footer-logo {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .footer-logo span { color: var(--primary); }
+        .footer-links h4 {
+            margin-bottom: 16px;
+            font-size: 16px;
+        }
+        .footer-links a {
+            display: block;
+            color: #ccc;
+            margin-bottom: 12px;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 14px;
+        }
+        .copyright a {
+            color: #aaa;
+            margin-left: 12px;
+            text-decoration: none;
+        }
+        .copyright a:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 38px; }
+            .section-title { font-size: 32px; }
+            .nav-links { gap: 20px; }
+        }
+    </style>
+</head>
+<body id="top">
+
+    <!-- Header -->
+    <header>
+        <div class="container nav">
+            <div class="logo">Plumb<span>Pro</span></div>
+            <div class="nav-links">
+                <a href="#">For Customers</a>
+                <a href="#">Login</a>
+                <a href="apply.html" class="btn btn-primary">Apply Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>Become a <span>PlumbPro Partner Plumber</span></h1>
+            <p>Join our network of trusted professional plumbers and get access to steady, high-paying jobs in your area — all while using our powerful field service app for free.</p>
+            <a href="#apply" class="btn btn-success">Apply to Become a Partner</a>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title">Why Partner with PlumbPro?</h2>
+            <p class="section-subtitle">We connect you with customers who need your services — fast, reliable, and profitable.</p>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-dollar-sign"></i></div>
+                    <h3>Higher Earnings</h3>
+                    <p>Get paid competitive rates with no commission fees taken from your payout. Keep 100% of what you earn.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <h3>Steady Work</h3>
+                    <p>Receive daily job requests matched to your skills, location, and availability.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-tools"></i></div>
+                    <h3>Free Professional Tools</h3>
+                    <p>Use our full-featured mobile app at no cost: scheduling, routing, invoicing, payments, and more.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-headset"></i></div>
+                    <h3>Support When You Need It</h3>
+                    <p>24/7 partner support team to help with job questions, disputes, or app issues.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-star"></i></div>
+                    <h3>Grow Your Reputation</h3>
+                    <p>Earn 5-star reviews from verified customers and build your profile in the PlumbPro network.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Insurance & Protection</h3>
+                    <p>Every job is covered by our partnership liability protection for added peace of mind.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Simple steps to start earning more as a PlumbPro partner</p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Apply Online</h3>
+                    <p>Submit your details, license, and insurance info in under 5 minutes.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Get Approved</h3>
+                    <p>We review your application and background check within 24-48 hours.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Download the App</h3>
+                    <p>Get instant access to the PlumbPro Partner app and complete onboarding.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Start Accepting Jobs</h3>
+                    <p>Go online, receive job requests, and start earning right away.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Requirements -->
+    <section class="requirements">
+        <div class="container">
+            <h2 class="section-title">Partner Requirements</h2>
+            <p class="section-subtitle">To maintain quality service, we ask that partners meet these standards</p>
+
+            <div class="req-list">
+                <div class="req-item"><i class="fas fa-check-circle"></i> Valid plumbing license</div>
+                <div class="req-item"><i class="fas fa-check-circle"></i> General liability insurance ($1M minimum)</div>
+                <div class="req-item"><i class="fas fa-check-circle"></i> At least 2 years of professional experience</div>
+                <div class="req-item"><i class="fas fa-check-circle"></i> Clean background check</div>
+                <div class="req-item"><i class="fas fa-check-circle"></i> Reliable vehicle and tools</div>
+                <div class="req-item"><i class="fas fa-check-circle"></i> Professional attitude and communication</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="apply">
+        <div class="container">
+            <h2>Ready to Join the PlumbPro Partner Network?</h2>
+            <p>Start receiving high-quality job leads today. No subscription fees. No hidden costs.</p>
+            <a href="apply.html" class="btn">Apply Now - It's Free</a>
+            <p style="margin-top:40px;font-size:16px;opacity:0.9;">Most partners are approved within 48 hours</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <div class="footer-logo">Plumb<span>Pro</span></div>
+                <p style="color:#ccc;">Connecting customers with trusted local plumbers</p>
+            </div>
+            <div class="footer-links">
+                <h4>For Plumbers</h4>
+                <a href="#">Become a Partner</a>
+                <a href="#">Partner Login</a>
+                <a href="#">Partner Support</a>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <a href="#">About Us</a>
+                <a href="#">Careers</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+        <div class="container copyright">
+            © 2025 AspirecodeAI. All rights reserved. <a href="#top">↑ Top</a>
+        </div>
+    </footer>
+
+</body>
+</html>
